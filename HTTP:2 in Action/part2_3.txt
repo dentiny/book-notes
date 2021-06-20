@@ -1,0 +1,17 @@
+HTTP/2:
+1. binary rather then textual
+2. multiplexed rather than synchronous
+  - only one TCP connection, HTTP/1.1 will open multiple TCP connections
+    Why HTTP/1.1 slow? TCP three-way handshaking, SSL establishment, slow start
+  - one connection could have multiple streams; a may contain multiple frames
+  - HTTP/2 framing layer is responsible for multiplexing and demultiplexing
+3. stream prioritization
+  - stream dependency
+  - stream weighing
+ 4. header compression
+  HPACK(static table, dynamic table, huffman coding)
+ 5. server push server respond more than one resource for one request
+  - eliminate the need for spritting(concatenation and resource inlining)
+  - con: overpushing: push unused resources, waste bandwidth
+  - preload: client-side indicate resource it would require while loading
+    current page
