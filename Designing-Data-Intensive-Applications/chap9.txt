@@ -1,0 +1,45 @@
+1. transaction isolation('I' in ACID): avoid data race due to concurrently 
+executing transactions
+consistency('C' in CAP): coordinate the state of replicas in the face of delays
+and faults
+
+1. (1) linearizability('C' at CAP theory in distributed system field, also
+called strong consistency):
+1/ system appears as if there's only one machine
+2/ if a client completes a write, all clients should see the value written
+3/ recency guarentee: data read is promised to be the lastest
+
+(2) serializability:
+1/ transactions are executed and committed in a serial order(isolation)
+2/ if node1 writes A, node2 writes B, all nodes executes in the same order(get
+the same eventual value)
+3/ after write B is considered complete, reader could still get A
+
+(3) strict serializability: linearizability and serializability
+
+(4) causal consistency: guarentee partial ordering, while linearizability
+promises total ordering
+
+3. (1) the truth lies in the majority(ch8)
+(2) quorum doesn't promise lineaizability(P334): when majority have stale value
+
+4. understanding of CAP theorem(P337):
+When facing network partition, you could only choose consistency(linearizability)
+or availabiltity.
+
+5. version vector and Lamport timestamp:
+(1) version vector can distinguish whether two operations are concurrent or
+causally dependent on the other, it guarentees partial ordering
+(2) Lamport timestamp: promise total ordering, cannot tell whether two 
+operations are concurrent or causally dependent
+
+6. 2PC(twp-phase commit, prepare/commit): ensures atomic commit
+2PL(two-phase locking. growing/shrinking): ensures serializable isolation
+
+7. Why not use 2PC?
+(1) performance penalty
+(2) hard to deal with leader failure: leader holds information different
+information with replicas(eg: leader knows whether some nodes agrees commit),
+so replcas cannot play as the candate for leader
+solution: total order broadcast(also named atomic broadcast)
+multiple processes receive same set of messages in the same order

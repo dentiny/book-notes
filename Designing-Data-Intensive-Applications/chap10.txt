@@ -1,0 +1,18 @@
+1. batch processing deals with bounded input data
+stream processing deals with unbounded input data
+
+2. Why MapReduce implements fully materializing intermediate state?
+(1) for quick disaster recovery, if not persisted, system would recompute more
+data
+(2) MapReduce has considered data locality, which prefers to load file from
+current machine. But environment at Google(cluster manager Borg), low priority
+task(eg: batch processing MapReduce) is more likely to be de-scheduled
+
+3. improvements on MapReduce
+(1) don't materialize every single file: leverage memory and achieve better
+locality
+(2) currently MapReduce enforce sorting after Map, elimiate unnecessary ones
+(3) MapReduce usually connects, within which some Map does nothing
+Map and Reduce could be used as seperate operator, thus removing unnessary Maps
+(4) no need to wait entire Map operator finishes before Reduce
+(5) MapReduce launches one JVM process for each task, could reuse existing one

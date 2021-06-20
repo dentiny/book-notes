@@ -1,0 +1,21 @@
+1. Why not direct communication between producers and consumers?
+(1) speed mismatch(message broker buffers)
+(2) what if node failure? (message broker provides fault tolerance)
+
+2. How to keep systems in sync?
+(1) periodical full database dump, but could be slow
+(2) dual write: application directly makes updates, but not viable
+problems: 1/ updates not in the same order
+2/ some updates succeed, others fail
+(3) use message broker as middleware
+
+3. log-based message broker:
+(1) provides total ordering within partition, no ordering guarentee across
+partitions
+(2) could be used to keep heterogeneous consumers in sync(eg, data warehouse,
+search index, etc)
+(3) logs stored at circular bounded buffer on disk
+
+4. How stream system achieves fault tolerance?
+(1) implement mini-batching, which consists of bounded input data
+(2) apply fault tolerance strategy used by batch system

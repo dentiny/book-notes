@@ -1,0 +1,18 @@
+1. How to achieve bounded delay(hard to achieve)(P286)
+(1) QoS(Quality of Service): technique that manages data traffic to reduce
+packet loss, latenc, jitter
+(2) admission control: check before establishing connection
+
+2. LWW(Last Write Wins) widely accepted, problem on physical time decision:
+(1) clock_gettime(CLOCK_REALTIME): could jump forward or backward
+(2) clock_gettime(CLOCK_MONOTONIC): deesn't represent absolute time. but
+guarentee monotonous on single machine(actually single CPU)
+(3) could sync-up by NTP(Network Tiime Protocal)
+	potential problem: NTP daemon misconfiguration, firewall blocks NTP traffic,
+	clock error due to drift becomes large
+
+3. process could suspend, don't make assumptions upon that
+(1) suspension reason: P296
+(2) bad code example: P296
+
+4. The truth is defined by the majority.

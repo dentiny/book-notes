@@ -1,0 +1,17 @@
+reliability:
+(1) fault vs failure
+fault: a component of the system deviate from its spec
+faulure: the system as a whole stops providing the required service
+(2) fault-tolerance handling works for hardware faults, and planned downtime
+(3) how to handle: thorough testing; process isolation(sandboxing); measure, 
+monitor and analyze
+
+scalability:
+(1) identify key parameter of scalability
+twitter example: P11-13
+(2) performance evaluation: throughput, response time
+note:
+response time: interval between user issues and receives
+latency: interval request waits to be handled
+(3) prefer percentile over mean and median(SLO, SLA)
+(4) one reason why response time's terrible: head-of-line blocking(tail latency)

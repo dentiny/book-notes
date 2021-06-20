@@ -1,0 +1,16 @@
+1. Kubernetes organize components in the unit of containers, rather than VMs,
+which leverages Linux virtualization technology.
+
+2. Kubernetes exposes the whole datacenter as a single computational resource
+for running applications, it can be thought of as OS for the cluster.
+
+3. functionality:
+(1) service discovery
+(2) load balancing
+(3) health checking and self-healing
+(4) simplify application deployment(indicated via config files)
+(5) automatic scaling: detect resource insufficiency and request more actively
+
+4. application-oriented: 
+eg: (1) load-balancing is performed in the unit of application, rather than machine
+(2) log is keyed by application

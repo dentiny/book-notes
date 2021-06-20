@@ -1,0 +1,31 @@
+LSM-Tree:
+(1) memtable, with seperate log files
+(2) SSTable, with bloom filter and index
+(3) from BigTable:
+minor compaction: persist memtable to SSTable
+merging compaction: merge several SSTables, could contain delete operation
+major compaction: merge memtable and all SSTables, no delete operation
+(4) log: an append-only sequence of records
+
+in-mem database:
+(1) from P89:
+Counterintuitively, the performance advantage of in-memory databases is not due
+to the fact that they don’t need to read from disk. Even a disk-based storage 
+engine may never need to read from disk if you have enough memory, because the 
+operating sys‐ tem caches recently used disk blocks in memory anyway. Rather, 
+they can be faster because they can avoid the overheads of encoding in-memory 
+data structures in a form that can be written to disk [44].
+(2) support data structures not friendly encoded to disk, eg: priority queue
+
+from P99, BigTable, Cassandra: columns within a column family are stored 
+together with a row key, it's mostly row-oriented.
+
+from "Architecture of a Database System" P196 4.6, and DDIA P91:
+(1) OLAP: 1/ main read pattern: aggregate over large numbers of records
+2/ main write pattern: bulk import(ELT) or event stream
+3/ data represents history of events over time
+(2) OLAP: 1/ main read pattern: small numbers of record per query
+2/ main write pattern: random-access, low-latency writes from user input
+3/ data represents lastest state(current point in time)
+(3) data warehouse works OLAP on seperate hardware from OLTP
+(4) different replication could perform various compression

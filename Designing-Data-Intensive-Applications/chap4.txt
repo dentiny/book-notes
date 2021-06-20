@@ -1,0 +1,12 @@
+network dataflow:
+(1) RPC
+flaw: 1/ network status unpredictable, whether could get result, and latency
+2/ hard to locate problem(too many points could go wrong)
+3/ retry implementation needs idempotence
+4/ encode and decode overhead
+
+(2) message broker:
+1/ act as buffer to mitigate sender and receiver status(unavailable, overloaded)
+2/ redeliver message if no response
+3/ one message could be sent to multiple recipients
+4/ decouple senders from recipients

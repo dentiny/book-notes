@@ -1,0 +1,11 @@
+From Docker Deep Dive.
+1. image vs container(P51)
+images: stopped containers, build-time constructs
+containers: runtime constructs
+
+2. container vs VM
+hypervisor performs hardware virtualization, carve up physical hardware
+resource into VMs
+container performs OS virtualization, carve OS resources into containers
+
+3. P102 only copy what's needed, avoid image size too big(P102)

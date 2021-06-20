@@ -1,0 +1,33 @@
+How to set up a new follower?
+(1) get snapshot of primary
+(2) copy it to secondary
+(3) follower requests changes since primary snapshot
+
+replication log problem caused by read on secondary:
+since replication log is not promised to replicate on secondary, only eventual 
+consistency guarenteed
+(1) read-your-writes consistency
+	1/ always read from primary
+	2/ keep timestamp, and ensure timestamp monotonously increase(Zookeeper)
+(2) monotonic read(read version m after reading version n, where m < n)
+(3) consistent prefix read(causal consistency)
+
+multi-leader replication:
+(1) use case: multi-datacenter operation: every datacenter has own leader
+(2) cannot perform synchronous conflict detection
+(3) avoidance: particular record goes to only one leader(eg: partition)
+(4) automatic conflict resolution(P174):
+1/ conflict-free replicated datatypes
+2/ mergeable persistent data structure
+3/ operational transformation(conflict resolution algorithm)
+
+leader-less replication:
+(1) read repair and anti-entropy process:
+1/ when reading, detect lagging replicas and sync them up
+2/ look for difference in data between replicas and copy missing from one to
+another
+
+improvement on quorum-based protocal: sloppy quorum and hinted handoff(DynamoDB)
+(1) when quorum is not met(maybe because of a temporary network offline), store 
+it to a server which is not in the replication group
+(2) after the replica server comes back, pass the data back to it

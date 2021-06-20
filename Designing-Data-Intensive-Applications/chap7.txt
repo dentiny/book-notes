@@ -1,0 +1,21 @@
+ACID:
+(1) atomicity: describes what happens if a client wants to make several writes, 
+but a fault occurs after some of the writes have been processed
+(2) consistency: invariants must always be true, eg: credits and debits across
+all accounts must always be balanced
+(3) isolation: concurrently executing transactions are isolated from each other
+(4) durability: promise that once a txn has committed successfully, any data it 
+has written won't be forgotten, even if there's a hardware fault or database 
+crash
+
+multi-object transaction use case(P231):
+(1) there's foreign key in relational database, update has to make sure 
+references remain valid
+(2) in databases with secondary index, updating a value involves updating a
+secondary index
+
+When to perform retry for fault? P232
+It's only worth retrying after transient errors(eg: deadlock, isolation 
+violation, temporary network interruptions); after a permanent error(eg:
+contraint violation) a retry would be pointless(could worsen overload, 
+perform operation multiple times)

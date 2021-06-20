@@ -1,0 +1,15 @@
+HTTP/0.9: single request and reply
+HTTP/1.1:
+(1) persistent TCP connection
+	Connection: Keep-alive
+	Connection: Close
+(2) pipelining: concurrently request and respond multiple resources, but suffer
+HOL(Head-of-Line) blocking
+(3) workaround:
+	1/ multiple TCP connections
+		eg: domain sharding(at most 6 connection for a domain)
+	2/ spritting:
+		- bundle resources into big files
+		- resource inlining, eg: embed image into HTML
+	3/ caching
+(4) in a word, HTTP/2 is a synchronous request and response

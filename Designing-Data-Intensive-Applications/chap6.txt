@@ -1,0 +1,20 @@
+consideration for partitioning:
+(1) locality(eg: key range)
+(2) repartitioning(add/remove node)
+(3) even load distribution(relieve hotspot)
+
+two main partitioning:
+(1) key-range partitioning
+1/ bad for load distribution, good for locality
+2/ could parition into sub-partition for hotspot
+(2) hash partitioning
+
+secondary index:
+(1) local index(document-paritioned index): only stores index for this node
+(2) global index(term-partitioned index): stores index globally as primary key
+
+service directory(request routing):
+(1) client knows about partitioning
+(2) routing tier, also as load balancer
+(3) nodes know full partitioning
+	client could contact any node, either accept locally or forward to another
