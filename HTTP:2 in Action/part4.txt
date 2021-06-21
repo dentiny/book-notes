@@ -1,0 +1,20 @@
+How TCP slows down HTTP?
+1. handshaking: connection establishment, SSL
+  - TCP with fast open could optimize
+ 2. slow start
+ 3. HTTP/1.1 specifically, idle connection
+  - eg: open 6 connections at a time, conn1 is has fetched HTML from amazon.com,
+    while other connections are still on the road, cause conn1 idle
+ 4. HTTP/2 specifically, packet loss
+  - packet loss doesn't necessarily means bandwidth unavailable
+  - CWND halves after packet loss, affect much more to single-connection HTTP/2
+  - HOL blocking solved at HTTP-level for HTTP/2, but not TCP-level
+  - retransmission could worsen the problem, eg: TCP buffer full
+    - could reduce retransmission by enabling SACK(Selective ACK)
+    
+2. QUIC
+(1) FEC(Forward Error Correction): like RAID5, used to reduce retransmission
+(2) connection migration
+  - with TCP underlying, IP change involes reconnection(eg: multiple networks)
+  - QUIC don't need to establish new connection
+(3) multiplexed, stream-based binary protocol, much like HTTP/2
